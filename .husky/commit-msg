@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+. "$(dirname -- "$0")/_/husky.sh"
+
+exit 0
+
+message="$(cat "$1")"
+
+echo "Checking commit-msg format... \"$message\""
+commitMessagePattern="^[[:upper:]]{3,}-[[:digit:]]+\:[[:space:]].*$"
+if ! [[ "$message" =~ $commitMessagePattern ]];
+then
+  echo " "
+  echo "🚨 Error: commit message format error"
+  echo "The commit message must have this format:"
+  echo "Example: TDM-123456: example commit message"
+  echo " "
+  echo "Your commit message was: "
+  echo "$message"
+  echo " "
+  exit 1
+fi
+exit 0
